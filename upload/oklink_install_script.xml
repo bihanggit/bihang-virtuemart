@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE install PUBLIC "-//Joomla! 1.5//DTD plugin 1.0//EN" "http://www.joomla.org/xml/dtd/1.5/plugin-install.dtd">
+
+<install version="1.5" type="plugin" group="vmpayment">
+
+	<name>Oklink VirtueMart Integration</name>
+
+	<creationDate>December 20th 2014</creationDate>
+	<author>Oklink</author>
+	<authorUrl>https://www.oklink.com</authorUrl>
+	<copyright>Copyright (C) 2014</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version status="MINOR">1.0.0</version>
+
+	<files>
+		<filename plugin="oklink">oklink.xml</filename>
+		<filename plugin="oklink">oklink.php</filename>
+	</files>
+
+	<languages>
+		<language tag="en-GB">en-GB.plg_vmpayment_oklink.ini</language>
+		<language tag="en-GB">en-GB.plg_vmpayment_oklink.sys.ini</language>
+	</languages>
+</install>
