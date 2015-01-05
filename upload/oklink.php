@@ -284,7 +284,7 @@ class plgVmPaymentOklink extends vmPSPlugin
             require(JPATH_VM_ADMINISTRATOR . DS . 'models' . DS . 'orders.php');
         }
         $oklink_data            = file_get_contents("php://input");
-        $oklink_data            = json_decode($oklink_data);
+        $oklink_data            = json_decode($oklink_data,true);
 
         if (!isset($oklink_data['id']))
         {
