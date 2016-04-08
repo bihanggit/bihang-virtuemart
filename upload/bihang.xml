@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <install version="1.5" type="plugin" group="vmpayment" >
-    <name>VM Payment - Oklink</name>
-    <creationDate>December 20 2014</creationDate>
-    <author>Oklink</author>
-    <authorUrl>https://www.oklink.com</authorUrl>
+    <name>VM Payment - Bihang</name>
+    <creationDate>04 08 2016</creationDate>
+    <author>bihang</author>
+    <authorUrl>https://www.bihang.com</authorUrl>
     <copyright>Copyright</copyright>
     <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <version>1.0.0</version>
-    <description>Oklink payment plugin</description>
+    <description>bihang payment plugin</description>
     <languages>
-	<language tag="en-GB">en-GB.plg_vmpayment_oklink.ini</language>
+	<language tag="en-GB">en-GB.plg_vmpayment_bihang.ini</language>
     </languages>
     <files>
-	<filename plugin="oklink">oklink.php</filename>
+	<filename plugin="bihang">bihang.php</filename>
     </files>
-	<params addpath="/plugins/vmpayment/oklink" />
+	<params addpath="/plugins/vmpayment/bihang" />
     <params addpath="/administrator/components/com_virtuemart/elements">
 
 	<param name="merchant_apikey" type="text"  label="API Key" description="API Key" />

@@ -6,7 +6,7 @@ if (!class_exists('vmPSPlugin'))
     require(JPATH_VM_PLUGINS . DS . 'vmpsplugin.php');
 }
 
-class plgVmPaymentOklink extends vmPSPlugin
+class plgVmPaymentBihang extends vmPSPlugin
 {
 
     /**
@@ -28,7 +28,7 @@ class plgVmPaymentOklink extends vmPSPlugin
      */
     public function getVmPluginCreateTableSQL()
     {
-        return $this->createTableSQL('Payment Oklink Table');
+        return $this->createTableSQL('Payment Bihang Table');
     }
 
     /**
@@ -73,8 +73,8 @@ class plgVmPaymentOklink extends vmPSPlugin
 
         $html = '<table class="adminlist">' . "\n";
         $html .= $this->getHtmlHeaderBE();
-        $html .= $this->getHtmlRowBE('OKLINK_PAYMENT_NAME', $paymentTable->payment_name);
-        $html .= $this->getHtmlRowBE('OKLINK_PAYMENT_TOTAL_CURRENCY', $paymentTable->payment_order_total . ' ' . $paymentTable->payment_currency);
+        $html .= $this->getHtmlRowBE('BIHANG_PAYMENT_NAME', $paymentTable->payment_name);
+        $html .= $this->getHtmlRowBE('BIHANG_PAYMENT_TOTAL_CURRENCY', $paymentTable->payment_order_total . ' ' . $paymentTable->payment_currency);
         $html .= '</table>' . "\n";
 
         return $html;
@@ -283,16 +283,16 @@ class plgVmPaymentOklink extends vmPSPlugin
         {
             require(JPATH_VM_ADMINISTRATOR . DS . 'models' . DS . 'orders.php');
         }
-        $oklink_data            = file_get_contents("php://input");
-        $oklink_data            = json_decode($oklink_data,true);
+        $bihang_data            = file_get_contents("php://input");
+        $bihang_data            = json_decode($bihang_data,true);
 
-        if (!isset($oklink_data['id']))
+        if (!isset($bihang_data['id']))
         {
             error_log('no invoice in data');
             return NULL;
         }
 
-        $order_number = $oklink_data['custom'];
+        $order_number = $bihang_data['custom'];
         if (!($virtuemart_order_id = VirtueMartModelOrders::getOrderIdByOrderNumber ($order_number)))
         {
             error_log('order not found '.$order_number);
@@ -308,15 +308,15 @@ class plgVmPaymentOklink extends vmPSPlugin
         }
 
         $method = $this->getVmPluginMethod($order['details']['BT']->virtuemart_paymentmethod_id);
-        require_once(dirname(__FILE__).'/lib/Oklink.php');
-        $client = Oklink::withApiKey($method->merchant_apikey, $method->merchant_apisecret);
+        require_once(dirname(__FILE__).'/lib/Bihang.php');
+        $client = Bihang::withApiKey($method->merchant_apikey, $method->merchant_apisecret);
         if (!$client.checkCallback())
         {
             bplog('api key invalid for order '.$order_number);
             return NULL;
         } 
 
-        if ( $oklink_data['status'] != 'completed')
+        if ( $bihang_data['status'] != 'completed')
         {
             return NULL; // not the status we're looking for
         }
@@ -453,11 +453,11 @@ class plgVmPaymentOklink extends vmPSPlugin
                             'success_url'    => (JROUTE::_ (JURI::root () . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&on=' . $order['details']['BT']->order_number . '&pm=' . $order['details']['BT']->virtuemart_paymentmethod_id . '&Itemid=' . JRequest::getInt ('Itemid'))),
                 );
 
-            require_once(dirname(__FILE__).'/lib/Oklink.php');
-            $client = Oklink::withApiKey($method->merchant_apikey, $method->merchant_apisecret);
+            require_once(dirname(__FILE__).'/lib/Bihang.php');
+            $client = Bihang::withApiKey($method->merchant_apikey, $method->merchant_apisecret);
             $result = $client->buttonsButton($params);
             $button_id = $result->button->id;
-            header('Location:'.OklinkBase::WEB_BASE.'merchant/mPayOrderStemp1.do?buttonid='.$button_id);
+            header('Location:'.BihangBase::WEB_BASE.'merchant/mPayOrderStemp1.do?buttonid='.$button_id);
         }else{
             $app->redirect(JRoute::_('index.php?option=com_virtuemart&view=cart', false), "only support USD or CNY or BTC");
         }

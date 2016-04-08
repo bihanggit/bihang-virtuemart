@@ -1,24 +1,25 @@
 <?php
 require_once(dirname(__FILE__) .'/Base.php');
-class Oklink extends OklinkBase{
-public static function withApiKey($key, $secret)
-{
-    return new Oklink(new Oklink_ApiKeyAuthentication($key, $secret));
-}
-public static function withSimpleApiKey($key)
-{
-    return new Oklink(new Oklink_SimpleApiKeyAuthentication($key));
-}
-public static function withOAuth($oauth, $tokens)
-{
-    return new Oklink(new Oklink_OAuthAuthentication($oauth, $tokens));
-}
-function __construct($authentication, $tokens=null, $apiKeySecret=null) {
-    parent::__construct($authentication, $tokens=null, $apiKeySecret=null);
-}
+class Bihang extends BihangBase{
 
+    public static function withApiKey($key, $secret)
+    {
+        return new Bihang(new Bihang_ApiKeyAuthentication($key, $secret));
+    }
 
+    public static function withSimpleApiKey($key)
+    {
+        return new Bihang(new Bihang_SimpleApiKeyAuthentication($key));
+    }
 
+    public static function withOAuth($oauth, $tokens)
+    {
+        return new Bihang(new Bihang_OAuthAuthentication($oauth, $tokens));
+    }
+
+    function __construct($authentication, $tokens=null, $apiKeySecret=null) {
+        parent::__construct($authentication, $tokens=null, $apiKeySecret=null);
+    }
 
     public function addressesAddress($params=null){
         return $this->get("addresses",$params);
@@ -125,6 +126,27 @@ function __construct($authentication, $tokens=null, $apiKeySecret=null) {
 
 
 
+    public function payOrder4Step2Transaction($id,$params=null){
+        return $this->put("transactions/$id/complete_send",$params);
+    }
+
+
+
+
+    public function cancelPayOrderTransaction($id,$params=null){
+        return $this->put("transactions/$id/cancel_payorder",$params);
+    }
+
+
+
+
+    public function cancelPaymentOrderTransaction($id,$params=null){
+        return $this->put("transactions/$id/cancel_send",$params);
+    }
+
+
+
+
     public function cancelReceivePayOrderTransaction($id,$params=null){
         return $this->put("transactions/$id/cancel_request",$params);
     }
@@ -134,6 +156,13 @@ function __construct($authentication, $tokens=null, $apiKeySecret=null) {
 
     public function simpleTransaction($params=null){
         return $this->get("transactions",$params);
+    }
+
+
+
+
+    public function sendMoneyTransaction($params=null){
+        return $this->put("transactions/send_money",$params);
     }
 
 

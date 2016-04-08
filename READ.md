@@ -1,4 +1,4 @@
-oklink/virtuemart-plugin
+bihang/virtuemart-plugin
 ========================
 #Requirement
 PHP 5.3+
@@ -22,8 +22,8 @@ configuration instructions below.
 2. Browse and select zip file, click Upload & Install.
 3. Go to Manage, and find the plugin, click on publish.
 4. Go to Components -> VirtueMart and click on Payment Methods.
-5. Click New. and type in the information, selecting VM Payment-Oklink as Payment Method.
-6. Create an API Key and Secret in your oklink account at oklink.com.
+5. Click New. and type in the information, selecting VM Payment-bihang as Payment Method.
+6. Create an API Key and Secret in your bihang account at bihang.com.
 7. Click Configuration in the Tab menu, and enter your API Key and Secret from step 4
 
 ## VirtueMart Support
